@@ -55,6 +55,7 @@ const resolveQuesetion = async () => {
             transaction,
         })
         
+        // TODO: can use child_process to seperated process here, if we don't concern fallback.
         if (result.length) {
             for (let idx = 0; idx < result.length; idx++) {
                 const cell = result[idx];
