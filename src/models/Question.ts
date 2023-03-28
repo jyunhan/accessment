@@ -1,5 +1,5 @@
-const { sequelize } = require('../database')
-const { DataTypes } = require('sequelize')
+import { DataTypes } from 'sequelize';
+import sequelize from '../database';
 
 const QuestionModule = sequelize.define('Question', {
     // Model attributes are defined here
@@ -19,4 +19,4 @@ const QuestionModule = sequelize.define('Question', {
     // indexes: []
   });
 
-module.exports = QuestionModule
+export default QuestionModule

@@ -1,5 +1,5 @@
-const CronJob = require('cron').CronJob;
-const { resolveQuesetion } = require('../services/question');
+import { CronJob } from 'cron';
+import questionService from '../services/question';
 
 const job = new CronJob(
     '*/4 * * * * *',
@@ -8,7 +8,7 @@ const job = new CronJob(
 
         // Randomly 3 - 5 sec.,
         setTimeout(async () => {
-            await resolveQuesetion();
+            await questionService.resolve();
         }, idleTime * 1000)
     },
     null,

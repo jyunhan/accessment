@@ -1,13 +1,13 @@
-#!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
 
-var app = require('../app');
+import sequelize from './src/database';
+
+import app from './src/app';
+
 var debug = require('debug')('cyberpunk-demo:server');
 var http = require('http');
-var { sequelize } = require('../src/database');
 
 /**
  * Get port from environment and store in Express.
@@ -29,7 +29,7 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('listening', async () => {
   // WARN: no good!!! dangerouse!! but work for dev.
-  await sequelize.sync({ force: true });
+  await sequelize.sync({ force: false });
   console.log('server on');
 })
 server.on('error', onError);
@@ -39,7 +39,7 @@ server.on('listening', onListening);
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val) {
+function normalizePort(val: any) {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -59,7 +59,7 @@ function normalizePort(val) {
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error) {
+function onError(error: any) {
   if (error.syscall !== 'listen') {
     throw error;
   }
