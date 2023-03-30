@@ -1,0 +1,72 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+  version: '3.4'
+services:
+  redis-node1:
+      build:
+          context: redis
+      ports:
+          - "${REDIS_PORT_NODE1}:${REDIS_PORT_NODE1}"
+          - "1${REDIS_PORT_NODE1}:1${REDIS_PORT_NODE1}"
+      entrypoint: [redis-server, /usr/local/etc/redis/redis.conf, --port,"${REDIS_PORT_NODE1}", --cluster-announce-ip,"${ip}"]
+  redis-node2:
+      build:
+          context: redis
+      ports: 
+          - "${REDIS_PORT_NODE2}:${REDIS_PORT_NODE2}"
+          - "1${REDIS_PORT_NODE2}:1${REDIS_PORT_NODE2}"
+      entrypoint: [redis-server, /usr/local/etc/redis/redis.conf, --port,"${REDIS_PORT_NODE2}", --cluster-announce-ip,"${ip}"]
+  redis-node3:
+      build:
+          context: redis
+      ports: 
+          - "${REDIS_PORT_NODE3}:${REDIS_PORT_NODE3}"
+          - "1${REDIS_PORT_NODE3}:1${REDIS_PORT_NODE3}"
+      entrypoint: [redis-server, /usr/local/etc/redis/redis.conf, --port,"${REDIS_PORT_NODE3}", --cluster-announce-ip,"${ip}"]
+  redis-node4:
+      build:
+          context: redis
+      ports: 
+          - "${REDIS_PORT_NODE4}:${REDIS_PORT_NODE4}"
+          - "1${REDIS_PORT_NODE4}:1${REDIS_PORT_NODE4}"
+      entrypoint: [redis-server, /usr/local/etc/redis/redis.conf, --port,"${REDIS_PORT_NODE4}", --cluster-announce-ip,"${ip}"]
+  redis-node5:
+      build:
+          context: redis
+      ports: 
+          - "${REDIS_PORT_NODE5}:${REDIS_PORT_NODE5}"
+          - "1${REDIS_PORT_NODE5}:1${REDIS_PORT_NODE5}"
+      entrypoint: [redis-server, /usr/local/etc/redis/redis.conf, --port,"${REDIS_PORT_NODE5}", --cluster-announce-ip,"${ip}"]
+  redis-node6:
+      build:
+          context: redis
+      ports: 
+          - "${REDIS_PORT_NODE6}:${REDIS_PORT_NODE6}"
+          - "1${REDIS_PORT_NODE6}:1${REDIS_PORT_NODE6}"
+      entrypoint: [redis-server, /usr/local/etc/redis/redis.conf, --port,"${REDIS_PORT_NODE6}", --cluster-announce-ip,"${ip}"]
+  redis-cluster-creator:
+      image: redis
+      entrypoint: [/bin/sh,-c,'echo "yes" | redis-cli --cluster create ${ip}:${REDIS_PORT_NODE1} ${ip}:${REDIS_PORT_NODE2} ${ip}:${REDIS_PORT_NODE3} ${ip}:${REDIS_PORT_NODE4} ${ip}:${REDIS_PORT_NODE5} ${ip}:${REDIS_PORT_NODE6} --cluster-replicas 1']
+      depends_on: 
+        - redis-node1 
+        - redis-node2
+        - redis-node3 
+        - redis-node4
+        - redis-node5 
+        - redis-node6
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: pgadmin4_container
+  #   restart: always
+  #   ports:
+  #     - "5050:80"

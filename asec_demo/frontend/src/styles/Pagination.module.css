@@ -1,0 +1,60 @@
+.cardConatiner {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    min-height: 400px;
+}
+
+.slider {
+    display: flex !important;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+}
+
+.card {
+    border: 1px solid lightyellow;
+}
+
+.frame {
+    width: 95%;
+    margin: auto;
+    border: 1px solid darkgray;
+    padding: 0px 5%;
+}
+
+.dotContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border: 1px solid darkgray;
+    border-radius: 50px;
+    margin: 0px 0.5%;
+}
+
+.dot.target {
+    background: rgba(var(--card-rgb), 0.1);
+    border: 1px solid rgba(var(--card-border-rgb), 0.15);
+}
+
+.searchContainer {
+    display: flex;
+    justify-content: right;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .dot:hover {
+        background: rgba(var(--card-rgb), 0.1);
+        border: 1px solid rgba(var(--card-border-rgb), 0.15);
+        cursor: pointer;
+    }
+}
+  
