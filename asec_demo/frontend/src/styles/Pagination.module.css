@@ -6,14 +6,16 @@
 }
 
 .slider {
-    display: flex !important;
-    flex-direction: column;
+    display: flex;
     flex: 1;
     justify-content: center;
     text-align: center;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .card {
+    width: 20%;
     border: 1px solid lightyellow;
 }
 

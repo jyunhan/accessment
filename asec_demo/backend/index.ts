@@ -10,14 +10,8 @@ dotenv.config()
 
 const main = async () => {
     const typeDefs = await readFile('./schema.graphql', 'utf-8');
-    // const context = async ({ req }: any) => {
-    //     if (req.auth) {
-    //     const user = await db.select().from('users').where('id', req.auth.sub).first();
-    //     return { user };
-    //     }
-    //     return {};
-    // };
-    // const apolloServer = new ApolloServer({ typeDefs, resolvers, context, formatError });
+
+    // const context = async ({ req }: any) => ({});
     const formatError = (error: GraphQLError) => ({
         message: error.message,
         errorCode: error.extensions.code,
@@ -27,8 +21,7 @@ const main = async () => {
     apolloServer.applyMiddleware({ app, path: '/graphql' });
 
     app.listen({ port: process.env.APP_PORT }, () => {
-        console.log(`Server running on port ${process.env.APP_PORT}`);
-        console.log(`GraphQL endpoint: http://localhost:${process.env.APP_PORT}/graphql`);
+        console.log(`Server is running on port ${process.env.APP_PORT}`);
     });
 }
 

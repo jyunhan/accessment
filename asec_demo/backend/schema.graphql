@@ -1,12 +1,12 @@
 type Query {
   countPage: Int
-  person(name: String): People
-  people(page: Int): [People]
+  character(name: String): Character
+  characters(page: Int): [Character]
   films: [Film]
 }
 
 # type Mutation {
-#   updatePerson(payload: String!): People
+#   updatePerson(payload: String!): Character
 # }
 
 type Film {
@@ -19,10 +19,10 @@ type Film {
   created: String
   edited: String
   url: String
-  characters: [People]
+  characters: [Character]
 }
 
-type People {
+type Character {
   name: String
   height: String
   mass: String

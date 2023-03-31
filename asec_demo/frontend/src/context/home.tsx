@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { usePeople, usePageCount } from '../graphql/hooks';
+import { useCharacter, usePageCount } from '../graphql/hooks';
 import { client as apolloClient, CHARACTER_QUERY, PEOPLE_QUERY } from '../graphql/queries';
 
 export type HomeContent = {
@@ -33,18 +33,24 @@ export const HomeContextProvider = (props: any) => {
     const [page, setPage] = useState(1);
     const [characterList, setCharacterList] = useState([]);
     const [searchText, setSearchText] = useState('');
-    const { people, loading: peopleFetchLoading } = usePeople(page);
+    const [isLoading, setIsLoading] = useState(false);
+    const { characters, loading: charactersFetchLoading } = useCharacter(page);
     const { pages, loading: pageCountLoading } = usePageCount();
-  
-    useEffect(() => {
-      setCharacterList(people)
-    }, [people])
 
-    const isLaodingCharacter = peopleFetchLoading || pageCountLoading;
+    useEffect(() => {
+      setCharacterList(characters)
+    }, [characters])
+
     const changeDotIdx = async (dotIdx: number) => {
       const newPage = dotIdx + 1
       setTargetDotIdx(dotIdx);
       setPage(newPage)
+      const { data, loading } = await apolloClient.query({
+        query: PEOPLE_QUERY,
+        variables: { page: newPage },
+      });
+      setCharacterList(data.characters);
+      setIsLoading(loading);
     }
 
     const doSearch = async () => {
@@ -54,16 +60,18 @@ export const HomeContextProvider = (props: any) => {
           query: PEOPLE_QUERY,
           variables: { page },
         });
-        result = [data.people];
+        result = [data.characters];
       } else {
         const { data } = await apolloClient.query({
           query: CHARACTER_QUERY,
           variables: { name: searchText },
         });
-        result = [data?.person];
+        result = [data?.character];
       }
       setCharacterList(result);
     }
+
+    const isLaodingCharacter = isLoading || charactersFetchLoading || pageCountLoading;
 
     return (
       <HomeContext.Provider
