@@ -19,7 +19,7 @@ Install all backend dependencies.
 ## Facilities
 
 Run redis cluster through container
-```docker compose down && clear && ip=$(ipconfig getifaddr en0) docker-compose up -d```
+```docker compose down && ip=$(ipconfig getifaddr en0) docker-compose up -d```
 
 ## Build, then launch!!
 

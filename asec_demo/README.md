@@ -33,6 +33,8 @@ Currently, only fetch character & film data by SWAPI and connect through apollo.
 - Do some unit test example.
 
 #### Frontend
+- Plck react-slide, it makes cards flash refresh, so terrible.
+- Make graphql queries more succinct.
 - Beautify User Interface. (low priority)
 
 ### Technical documentation
@@ -40,7 +42,7 @@ Currently, only fetch character & film data by SWAPI and connect through apollo.
 2. Establish shorten vision with hiring manager, evaluate and breakdown action items through the plan. (need talk)
 
 ### QA/Test plan
-In my experience, CI/CD is the primary quality control & quality assurance requiremet.  
+imo, CI/CD is the primary quality control & quality assurance requiremet.  
 However, it's too big to this quiz, may be I will adopt unit test in the very beginning.  
 If the program goes bigger, I tend to apply GitOps on git platform such as Git Action to help build test environment.  
 I might put DiD (docker in docker) asides in the first 1 years.
