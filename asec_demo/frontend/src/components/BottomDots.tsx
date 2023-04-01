@@ -1,29 +1,45 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import HomeContext from '../context/home';
+import { usePageCount } from '../graphql/hooks';
+import { client as apolloClient, PEOPLE_QUERY } from '../graphql/queries';
+
 import PaginationCss from '../styles/Pagination.module.css';
 
 function SearchBar() {
     const ctx = useContext(HomeContext);
-    const pageDotArray = Array.from({length: ctx.pages}, (_, index) => index + 1);
-    let pageNumber = ctx.page;
+    const { pages } = usePageCount();
 
-    const changePage = (idx: number) => {
-        if (pageNumber === idx + 1) return
-        pageNumber = idx + 1;
-        ctx.changeDotIdx(idx)
+    useEffect(() => {
+        ctx.homeDispatch({
+            type: 'SET_PAGES',
+            payload: {
+                pages,
+            }
+        })
+    }, [pages])
+
+    const onDotChange = async (dotIndex: number) => {
+        const fetchingEvent = 'CHARACTER_FETCHING'
+        ctx.homeDispatch({ type: 'IS_FETCHING', payload: { fetchingEvent }})
+        const page = dotIndex + 1;
+        const { data: { characters } } = await apolloClient.query({
+            query: PEOPLE_QUERY,
+            variables: { page },
+        });
+        ctx.homeDispatch({ type: 'CHANGE_PAGE', payload: { dotIndex, characters, fetchingEvent } })
     }
 
     return (
         <div className={PaginationCss.dotContainer}>
             {
-            pageDotArray.map((page: number, idx) => {
+            ctx.homeStatus.pageArray.map((page: number, idx: number) => {
                 return (
                 <div
                     key={idx}
-                    className={`${PaginationCss.dot} ${ctx.targetDotIdx === idx ? PaginationCss.target : ''}`}
-                    onClick={() => changePage(idx)}
+                    className={`${PaginationCss.dot} ${ctx.homeStatus.dotIndex === idx ? PaginationCss.target : ''}`}
+                    onClick={() => onDotChange(idx)}
                 >
                     {page.toString()}
                 </div>

@@ -8,7 +8,7 @@ import { client as apolloClient, PEOPLE_QUERY } from '../graphql/queries';
 const HomePage = (props: any) => {
   return (
     <HomeContextProvider>
-      <Pagiation characterList={props.characterList} />
+      <Pagiation characters={props.characters} />
     </HomeContextProvider>
   )
 };
@@ -21,7 +21,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      characterList: data.characters
+      characters: data.characters
     }
   }
 };

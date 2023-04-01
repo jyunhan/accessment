@@ -7,4 +7,4 @@ import extraCharacterJson from '../data/extra_character.json';
 const folderPath = path.resolve(__dirname, '../data');
 const db = new Database(folderPath);
 
-export const Character = db.table('character');
+export const Character = db.table('extra_character');

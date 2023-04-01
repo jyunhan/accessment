@@ -11,7 +11,6 @@ export const demoRequest = async (payload: AxiosRequestConfig) => {
     // TODO: Can adopt morgan & winston here...
     try {
         const { url } = payload;
-
         if (resCacheEnable) {
             const cacheData = await redis.get(url!);
             if (cacheData) {

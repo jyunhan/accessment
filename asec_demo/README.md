@@ -22,18 +22,21 @@ Reasons:
 2. Can demonstration a bit of operation tricks.
 3. When the cache expired, the UI request still pass to WSAPI website, still meet quiz requirement.
 
+
+### need Redux??
+This quiz no need to handle status' side effect, and the objective can achieve by raect hook(s).
+Keep it simple, so no apply yet.
+
 ## TODO
 ### Code
 Currently, only fetch character & film data by SWAPI and connect through apollo.
 
 #### Backend
 [-] Complete rest 4 of categories APIs and their relation.  
-[-] Migrate schema.graphql into ts format.  
 [-] Do some unit test example.  
-[-] Adopt TypeORM.  
+[-] Migrate schema.graphql into ts format and adopt TypeORM.  .  
 
 #### Frontend
-[-] Adopt useReducer hook to reduce useState amount
 [-] Display more user details in card.  
 [-] Beautify User Interface. (low priority)  
 
