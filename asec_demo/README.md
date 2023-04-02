@@ -1,8 +1,8 @@
 ## Installation guide
 Please dive into backend & frontend folders, you can see each applications' install process and launch commands.
 
-## Memo:
-Has spent 11 hours in this edition. 
+## Time spent:
+Total 13 hours in work. 
 
 ## Thinking Map
 ### Persistency Storage
@@ -22,7 +22,6 @@ Reasons:
 2. Can demonstration a bit of operation tricks.
 3. When the cache expired, the UI request still pass to WSAPI website, still meet quiz requirement.
 
-
 ### need Redux??
 This quiz no need to handle status' side effect, and the objective can achieve by raect hook(s).
 Keep it simple, so no apply yet.
@@ -33,8 +32,7 @@ Currently, only fetch character & film data by SWAPI and connect through apollo.
 
 #### Backend
 [-] Complete rest 4 of categories APIs and their relation.  
-[-] Do some unit test example.  
-[-] Migrate schema.graphql into ts format and adopt TypeORM.  .  
+[-] Migrate schema.graphql into ts format and adopt TypeORM.  
 
 #### Frontend
 [-] Display more user details in card.  
@@ -45,7 +43,13 @@ Currently, only fetch character & film data by SWAPI and connect through apollo.
 2. Establish shorten vision with hiring manager, evaluate and breakdown action items through the plan. (need talk)
 
 ### QA/Test plan
-Imo, CI/CD is the primary quality control & quality assurance requiremet.  
-However, it's too big to this quiz, may be I will adopt unit test in the very beginning.  
-If the program goes bigger, I tend to apply GitOps on git platform such as Git Action to help build test environment.  
-I might put DiD (docker in docker) asides in the first 1 years.
+There has a basic test sample in the program, in backend folder.  
+We can set coverage for team start from a loose thrshold to ask for code review.  
+The rate number will get higher, new rate comes from evaluation with team discussion and rolling performance.
+
+Frontend can do test for actions, but there are all external APIs fetching atm, I suspend it.
+Some team will adopt E2E test, imo, it's too expense unless we have enough sources of SDET group.
+
+Additionally, CI/CD is the primary quality control & quality assurance requiremet.  
+If the program goes bigger, we can apply GitOps (such as Git Action) to help build test environment in the beginning.  
+Then consider DiD (docker in docker) when the program ready to have product env.

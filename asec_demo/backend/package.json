@@ -5,10 +5,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./build/index",
-    "start:cronjob": "node ./build/src/schedule",
     "start:dev": "npx ts-node-dev ./index",
-    "start:dev:cronjob": "npx ts-node-dev ./src/schedule",
-    "jh": "dotenv -e .env -- ts-node-dev ./index"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@apollo/server": "^4.5.0",
@@ -36,8 +34,11 @@
   "devDependencies": {
     "@types/cron": "^2.0.1",
     "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.0",
     "@types/morgan": "^1.9.4",
     "@types/node": "^18.15.10",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.0.5",
     "typescript": "^5.0.2"
   }
 }

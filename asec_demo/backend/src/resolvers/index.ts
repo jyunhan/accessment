@@ -1,5 +1,7 @@
-import { Character } from '../utilities/extraFileReader';
+import { ExtraFileLoader } from '../utilities/extraFileLoader';
 import { demoRequest } from '../utilities/request'
+
+const ExtraFileReader = ExtraFileLoader.reader;
 
 const resolvers = {
   Query: {
@@ -26,7 +28,7 @@ const resolvers = {
       return response.results;
     },
     character: async (_root: any, { name }: { name: string }) => {
-      const localFileResult = await Character.findOne((character: any) => character.name === name);
+      const localFileResult = await ExtraFileReader.findOne((character: any) => character.name === name);
       if (localFileResult) {
         return localFileResult
       }

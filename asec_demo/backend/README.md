@@ -9,7 +9,7 @@ Please follow steps below to run the accessment backend service.
 2. npx
 3. docker
 4. nodejs (suggest LTS)
-5. give .env file values
+5. create .env file and set up values
 
 ## To install dependency
 
@@ -18,7 +18,7 @@ Install all backend dependencies.
 
 ## Facilities
 
-Run redis cluster through container
+Run redis cluster through container, the ip set from promt to bring local ip into process  
 ```docker compose down && ip=$(ipconfig getifaddr en0) docker-compose up -d```
 
 ## Build, then launch!!
@@ -26,3 +26,8 @@ Run redis cluster through container
 Fire Application!!
 1. ```npm run build```
 2. ```npm start```
+
+## Test
+
+Use Jest, test env has created and mandatory attributes have values
+```npm run test```
